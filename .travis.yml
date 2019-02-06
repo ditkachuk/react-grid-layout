@@ -2,7 +2,20 @@ language: node_js
 node_js:
   - "6"
   - "7"
-script:
-  - make build test
 cache: yarn
+
+jobs
+  include
+    - stage: build
+      script:
+        - make build test
+    - stage: npm release
+          if: NOT type = pull_request AND branch = master
+          before_deploy:
+          - yarn build:lib
+          deploy:
+            skip_cleanup: true
+            provider: npm
+            email: "dev.trauret@gmail.com"
+            api_key: "$NPM_API_KEY"
 
