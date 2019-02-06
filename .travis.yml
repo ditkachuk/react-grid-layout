@@ -1,18 +1,18 @@
+dist: trusty
 language: node_js
 node_js: "lts/*"
 
-jobs
-  include
+jobs:
+  include:
     - stage: build
       script:
-        - make build test
+        - yarn build test
     - stage: npm release
-          if: NOT type = pull_request AND branch = master
-          before_deploy:
-          - yarn build:lib
-          deploy:
-            skip_cleanup: true
-            provider: npm
-            email: "dev.trauret@gmail.com"
-            api_key: "$NPM_API_KEY"
-
+      if: NOT type = pull_request AND branch = master
+      before_deploy:
+      - yarn build
+      deploy:
+        skip_cleanup: true
+        provider: npm
+        email: "dev.trauret@gmail.com"
+        api_key: "$NPM_API_KEY"

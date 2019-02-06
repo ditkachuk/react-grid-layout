@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React-Grid-Layout
 
 [![travis build](https://travis-ci.org/STRML/react-grid-layout.svg?branch=master)](https://travis-ci.org/STRML/react-grid-layout)
@@ -425,3 +426,6 @@ us easily isolate it.
 - [x] Min/max w/h per item
 - [ ] Resizable handles on other corners
 - [ ] Configurable w/h per breakpoint
+=======
+# Test fork of [React-Grid-Layout](https://github.com/STRML/react-grid-layout)
+>>>>>>> Fix travis script
