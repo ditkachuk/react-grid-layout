@@ -1,8 +1,18 @@
 language: node_js
-node_js:
-  - "node"
-  - "lts/*"
-script:
-  - make build test
-cache: yarn
+node_js: "lts/*"
+
+jobs
+  include
+    - stage: build
+      script:
+        - make build test
+    - stage: npm release
+          if: NOT type = pull_request AND branch = master
+          before_deploy:
+          - yarn build:lib
+          deploy:
+            skip_cleanup: true
+            provider: npm
+            email: "dev.trauret@gmail.com"
+            api_key: "$NPM_API_KEY"
 

@@ -59,6 +59,7 @@ export type Props = {
   isDraggable: boolean,
   isResizable: boolean,
   preventCollision: boolean,
+  fixed: boolean,
   useCSSTransforms: boolean,
 
   // Callbacks
@@ -152,6 +153,8 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     isResizable: PropTypes.bool,
     // If true, grid items won't change position when being dragged over.
     preventCollision: PropTypes.bool,
+    // If true, grid items won't change position.
+    fixed: PropTypes.bool,
     // Use CSS transforms instead of top/left
     useCSSTransforms: PropTypes.bool,
 
@@ -217,6 +220,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     verticalCompact: true,
     compactType: "vertical",
     preventCollision: false,
+    fixed: false,
     onLayoutChange: noop,
     onDragStart: noop,
     onDrag: noop,
@@ -345,7 +349,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
   onDrag(i: string, x: number, y: number, { e, node }: GridDragEvent) {
     const { oldDragItem } = this.state;
     let { layout } = this.state;
-    const { cols } = this.props;
+    const { cols, maxRows } = this.props;
     var l = getLayoutItem(layout, i);
     if (!l) return;
 
@@ -368,8 +372,10 @@ export default class ReactGridLayout extends React.Component<Props, State> {
       y,
       isUserAction,
       this.props.preventCollision,
+      this.props.fixed,
       this.compactType(),
-      cols
+      cols,
+      maxRows
     );
 
     this.props.onDrag(layout, oldDragItem, l, placeholder, e, node);
@@ -391,7 +397,7 @@ export default class ReactGridLayout extends React.Component<Props, State> {
   onDragStop(i: string, x: number, y: number, { e, node }: GridDragEvent) {
     const { oldDragItem } = this.state;
     let { layout } = this.state;
-    const { cols, preventCollision } = this.props;
+    const { cols, maxRows, preventCollision, fixed } = this.props;
     const l = getLayoutItem(layout, i);
     if (!l) return;
 
@@ -404,8 +410,10 @@ export default class ReactGridLayout extends React.Component<Props, State> {
       y,
       isUserAction,
       preventCollision,
+      fixed,
       this.compactType(),
-      cols
+      cols,
+      maxRows
     );
 
     this.props.onDragStop(layout, oldDragItem, l, null, e, node);
