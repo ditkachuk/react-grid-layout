@@ -91,8 +91,10 @@ describe("moveElement", () => {
     y,
     isUserAction,
     preventCollision,
+    fixed,
     compactType,
-    cols
+    cols,
+    rows
   ) {
     return compact(
       moveElement(
@@ -102,8 +104,10 @@ describe("moveElement", () => {
         y,
         isUserAction,
         preventCollision,
+        fixed,
         compactType,
-        cols
+        cols,
+        rows
       ),
       compactType,
       cols
@@ -123,7 +127,8 @@ describe("moveElement", () => {
         1,
         2, // x, y
         true,
-        true, // isUserAction, preventCollision
+        true,
+        false, // isUserAction, preventCollision
         null,
         2 // compactType, cols
       )
@@ -146,6 +151,7 @@ describe("moveElement", () => {
         1,
         0, // x, y
         true,
+        false,
         false, // isUserAction, preventCollision
         "vertical",
         2 // compactType, cols
@@ -172,6 +178,7 @@ describe("moveElement", () => {
         0,
         1, // x, y
         true,
+        false,
         false, // isUserAction, preventCollision
         "vertical",
         10 // compactType, cols
@@ -199,6 +206,7 @@ describe("moveElement", () => {
         0,
         2, // x, y
         true,
+        false,
         false, // isUserAction, preventCollision
         "vertical",
         10 // compactType, cols
@@ -226,6 +234,7 @@ describe("moveElement", () => {
         1,
         0, // x, y
         true,
+        false,
         false, // isUserAction, preventCollision
         "vertical",
         2 // compactType, cols
@@ -253,6 +262,7 @@ describe("moveElement", () => {
         2,
         0, // x, y
         true,
+        false,
         false, // isUserAction, preventCollision
         "horizontal",
         10 // compactType, cols
@@ -283,7 +293,8 @@ describe("moveElement", () => {
         1,
         0, // x, y
         true,
-        false, // isUserAction, preventCollision
+        false,
+        false, // isUserAction, preventCollision, fixed
         "vertical",
         4 // compactType, cols
       )
@@ -315,7 +326,8 @@ describe("moveElement", () => {
         1,
         0, // x, y
         true,
-        false, // isUserAction, preventCollision
+        false,
+        false, // isUserAction, preventCollision, fixed
         "vertical",
         4 // compactType, cols
       )

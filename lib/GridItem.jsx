@@ -335,10 +335,11 @@ export default class GridItem extends React.Component<Props, State> {
     child: ReactElement<any>,
     position: Position
   ): ReactElement<any> {
-    const { cols, x, minW, minH, maxW, maxH } = this.props;
+    const { cols, maxRows, x, y, minW, minH, maxW, maxH } = this.props;
 
     // This is the max possible width - doesn't go to infinity because of the width of the window
     const maxWidth = this.calcPosition(0, 0, cols - x, 0).width;
+    const maxHeight = this.calcPosition(0, 0, 0, maxRows - y).height;
 
     // Calculate min/max constraints using our min & maxes
     const mins = this.calcPosition(0, 0, minW, minH);
@@ -346,8 +347,9 @@ export default class GridItem extends React.Component<Props, State> {
     const minConstraints = [mins.width, mins.height];
     const maxConstraints = [
       Math.min(maxes.width, maxWidth),
-      Math.min(maxes.height, Infinity)
+      Math.min(maxes.height, maxRows ? maxHeight : Infinity)
     ];
+
     return (
       <Resizable
         width={position.width}
@@ -434,7 +436,7 @@ export default class GridItem extends React.Component<Props, State> {
     ) => {
       const handler = this.props[handlerName];
       if (!handler) return;
-      const { cols, x, i, maxW, minW, maxH, minH } = this.props;
+      const { cols, maxRows, x, y, i, maxW, minW, maxH, minH } = this.props;
 
       // Get new XY
       let { w, h } = this.calcWH(size);
@@ -443,6 +445,11 @@ export default class GridItem extends React.Component<Props, State> {
       w = Math.min(w, cols - x);
       // Ensure w is at least 1
       w = Math.max(w, 1);
+
+      // Cap h at maxRows
+      h = Math.min(h, maxRows - y);
+      // Ensure w is at least 1
+      h = Math.max(h, 1);
 
       // Min/max capping
       w = Math.max(Math.min(w, maxW), minW);
