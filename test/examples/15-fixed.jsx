@@ -12,7 +12,7 @@ class BasicLayout extends React.PureComponent {
     onLayoutChange: function() {},
     cols: 6,
     preventCollision: true,
-    preventSwap: false,
+    fixed: true,
     compactType: null,
     maxRows: 2,
     swipe: true
