@@ -66,9 +66,9 @@ class BasicLayout extends React.PureComponent {
         i: "0"
       },
       {
-        x: 0,
+        x: 1,
         y: 1,
-        w: 4,
+        w: 2,
         h: 1,
         minW: 2,
         maxW: 6,
