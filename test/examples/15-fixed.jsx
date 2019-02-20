@@ -55,10 +55,10 @@ class BasicLayout extends React.PureComponent {
   generateLayout() {
     return [
       {
-        x: 2,
+        x: 0,
         y: 0,
-        w: 2,
-        h: 1,
+        w: 3,
+        h: 2,
         minW: 2,
         maxW: 6,
         minH: 1,
@@ -66,7 +66,7 @@ class BasicLayout extends React.PureComponent {
         i: "0"
       },
       {
-        x: 1,
+        x: 3,
         y: 1,
         w: 2,
         h: 1,
@@ -77,7 +77,7 @@ class BasicLayout extends React.PureComponent {
         i: "1"
       },
       {
-        x: 0,
+        x: 3,
         y: 0,
         w: 2,
         h: 1,
@@ -86,17 +86,6 @@ class BasicLayout extends React.PureComponent {
         minH: 1,
         maxH: 2,
         i: "2"
-      },
-      {
-        x: 4,
-        y: 0,
-        w: 2,
-        h: 2,
-        minW: 2,
-        maxW: 6,
-        minH: 1,
-        maxH: 2,
-        i: "3"
       }
     ];
   }
